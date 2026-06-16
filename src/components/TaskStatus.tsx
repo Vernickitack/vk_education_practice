@@ -343,7 +343,7 @@ export default function TaskStatus() {
               className={`list-group-item list-group-item-action mb-3 rounded-4 shadow-sm ${isActive ? 'active' : ''}`}
               onClick={() => setActiveTask(task.id)}
             >
-              <div className="d-flex align-items-start gap-3">
+              <div className="d-flex flex-column flex-md-row align-items-start gap-3">
                 <div className="form-check mt-1">
                   <input
                     className="form-check-input"
@@ -424,13 +424,12 @@ export default function TaskStatus() {
       {isEditModalRendered && editorTask && (
         <>
           <div className={`modal-backdrop fade ${isEditModalOpen ? 'show' : ''}`} />
-          <div
-            className={`modal fade ${isEditModalOpen ? 'show d-flex' : 'd-flex'}`}
+          <div className={`modal fade ${isEditModalOpen ? 'show d-flex' : 'd-flex'}`}
             tabIndex={-1}
             role="dialog"
             onClick={closeEditor}
           >
-            <div className="modal-dialog modal-dialog-centered modal-xl" role="document" onClick={event => event.stopPropagation()}>
+            <div className="modal-dialog modal-dialog-centered modal-xl modal-fullscreen-sm-down" role="document" onClick={event => event.stopPropagation()}>
               <div className="modal-content">
                 <div className="modal-header">
                   <h5 className="modal-title">Редактирование изображения</h5>

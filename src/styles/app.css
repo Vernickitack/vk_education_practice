@@ -213,12 +213,21 @@ body {
 
 .modal-body {
   overflow-y: auto;
+  max-height: calc(100vh - 180px);
 }
 
 .modal-body .col-12.col-md-5 {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.list-group-item .flex-fill {
+  min-width: 0;
+}
+
+.modal-fullscreen-sm-down .modal-content {
+  max-height: 100vh;
 }
 
 .app-footer {
