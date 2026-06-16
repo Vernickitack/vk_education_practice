@@ -50,7 +50,7 @@ export default function App() {
 
         <footer className="text-center py-3 mt-auto border-top">
           <div className="container">
-            <a href="https://github.com/Vernickitack" target="_blank" rel="noopener noreferrer">
+            <a href="https://github.com/Vernickitack/vk_education_practice" target="_blank" rel="noopener noreferrer">
               Ссылка на проект
             </a>
             <p className="mb-0" style={{ color: 'var(--text)' }}>&copy; 2026 Image Enhancement.</p>

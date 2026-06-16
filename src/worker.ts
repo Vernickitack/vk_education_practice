@@ -11,7 +11,7 @@ async function loadModel(): Promise<tf.LayersModel | tf.GraphModel> {
 
   await tf.setBackend('webgl')
   await tf.ready()
-  const modelPath = '/model/model.json'
+  const modelPath = `${import.meta.env.BASE_URL}model/model.json`
 
   try {
     model = await tf.loadGraphModel(modelPath)
