@@ -28,7 +28,7 @@ const STATUS_VARIANTS: Record<TaskStatus, string> = {
 
 const formatStatus = (status: TaskStatus) => STATUS_LABELS[status] || status
 
-const truncateFileName = (fileName: string, maxLength: number = 32): string => {
+const truncateFileName = (fileName: string, maxLength: number = 26): string => {
   if (fileName.length <= maxLength) return fileName
   return fileName.substring(0, maxLength) + '...'
 }
