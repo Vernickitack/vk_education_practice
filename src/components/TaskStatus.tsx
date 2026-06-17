@@ -32,7 +32,18 @@ const truncateFileName = (fileName: string, maxLength: number = 26): string => {
   if (fileName.length <= maxLength) return fileName
   return fileName.substring(0, maxLength) + '...'
 }
-
+const clampAdjustmentValue = (field: keyof Adjustments, value: number): number => {
+  switch (field) {
+    case 'brightness':
+      return Math.max(-0.5, Math.min(0.5, value))
+    case 'contrast':
+      return Math.max(-0.5, Math.min(0.5, value))
+    case 'saturation':
+      return Math.max(-1, Math.min(1, value))
+    default:
+      return value
+  }
+}
 export default function TaskStatus() {
   const { tasks, activeTaskId, setActiveTask, cancelTask, removeTask, reprocessTask, updateTask } = useEnhancement()
   const [selectedTaskIds, setSelectedTaskIds] = useState<Set<string>>(new Set())
@@ -242,11 +253,12 @@ export default function TaskStatus() {
 
   const updateAdjustment = (field: keyof Adjustments, value: number) => {
     if (!editorTask) return
+    const clampedValue = roundToThousandth(clampAdjustmentValue(field, value))
     const nextAdjustments: Adjustments = {
       brightness,
       contrast,
       saturation,
-      [field]: roundToThousandth(value)
+      [field]: clampedValue
     } as Adjustments
 
     setBrightness(roundToThousandth(nextAdjustments.brightness))
@@ -471,7 +483,10 @@ export default function TaskStatus() {
                           min={-0.5}
                           max={0.5}
                           value={brightness ?? 0}
-                          onChange={e => updateAdjustment('brightness', e.target.value === '' ? 0 : Number(e.target.value))}
+                          onChange={e => {
+                            const val = e.target.value === '' ? 0 : Number(e.target.value)
+                            updateAdjustment('brightness', val)
+                          }}
                         />
                       </div>
                       <div className="mb-3">
@@ -492,7 +507,10 @@ export default function TaskStatus() {
                           min={-0.5}
                           max={0.5}
                           value={contrast ?? 0}
-                          onChange={e => updateAdjustment('contrast', e.target.value === '' ? 0 : Number(e.target.value))}
+                          onChange={e => {
+                            const val = e.target.value === '' ? 0 : Number(e.target.value)
+                            updateAdjustment('contrast', val)
+                          }}
                         />
                       </div>
                       <div className="mb-3">
@@ -513,7 +531,10 @@ export default function TaskStatus() {
                           min={-1}
                           max={1}
                           value={saturation ?? 0}
-                          onChange={e => updateAdjustment('saturation', e.target.value === '' ? 0 : Number(e.target.value))}
+                          onChange={e => {
+                            const val = e.target.value === '' ? 0 : Number(e.target.value)
+                            updateAdjustment('saturation', val)
+                          }}
                         />
                       </div>
                     </div>
