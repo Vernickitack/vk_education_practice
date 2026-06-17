@@ -226,6 +226,24 @@ body {
   min-width: 0;
 }
 
+.list-group-item .text-truncate.flex-shrink-1 {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.list-group-item .text-truncate.flex-shrink-1 h3 {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.list-group-item .d-flex {
+  min-width: 0;
+}
+
 .modal-fullscreen-sm-down .modal-content {
   max-height: 100vh;
 }
@@ -347,5 +365,26 @@ body {
   .modal-body canvas,
   .modal-body img {
     max-height: calc(65vh - 140px);
+  }
+
+  .modal-fullscreen-sm-down {
+    margin: 0.5rem !important;
+  }
+
+  .modal-fullscreen-sm-down .modal-content {
+    border-radius: 0.75rem;
+  }
+
+  .modal-fullscreen-sm-down .modal-dialog {
+    margin: 0.5rem;
+  }
+
+  .list-group-item .d-flex.flex-column {
+    width: 100%;
+  }
+
+  .list-group-item .text-truncate.flex-shrink-1 {
+    min-width: 0;
+    max-width: 100%;
   }
 }

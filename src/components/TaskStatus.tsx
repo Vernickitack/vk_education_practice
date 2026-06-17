@@ -28,6 +28,11 @@ const STATUS_VARIANTS: Record<TaskStatus, string> = {
 
 const formatStatus = (status: TaskStatus) => STATUS_LABELS[status] || status
 
+const truncateFileName = (fileName: string, maxLength: number = 32): string => {
+  if (fileName.length <= maxLength) return fileName
+  return fileName.substring(0, maxLength) + '...'
+}
+
 export default function TaskStatus() {
   const { tasks, activeTaskId, setActiveTask, cancelTask, removeTask, reprocessTask, updateTask } = useEnhancement()
   const [selectedTaskIds, setSelectedTaskIds] = useState<Set<string>>(new Set())
@@ -358,9 +363,9 @@ export default function TaskStatus() {
                 </div>
 
                 <div className="flex-fill">
-                  <div className="d-flex flex-column flex-md-row justify-content-between gap-3">
-                    <div>
-                      <h3 className="h6 mb-1 text-truncate">{task.fileName}</h3>
+                  <div className="d-flex flex-column flex-md-row justify-content-between gap-3 w-100" style={{ minWidth: 0 }}>
+                    <div className="text-truncate flex-shrink-1" style={{ minWidth: 0 }}>
+                      <h3 className="h6 mb-1 text-truncate" title={task.fileName}>{truncateFileName(task.fileName)}</h3>
                       <span className={`badge bg-${statusVariant}`}>{formatStatus(task.status)}</span>
                     </div>
                     <div className="text-md-end text-secondary">
@@ -439,7 +444,7 @@ export default function TaskStatus() {
                   <div className="row gy-4">
                     <div className="col-12 col-md-5">
                       <div className="mb-4">
-                        <p className="mb-2">{editorTask.fileName}</p>
+                        <p className="mb-2 text-truncate" title={editorTask.fileName}>{truncateFileName(editorTask.fileName)}</p>
                         <canvas
                           ref={canvasRef}
                           className="img-fluid rounded"
